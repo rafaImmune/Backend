@@ -11,7 +11,7 @@ app.get('/jaja', function(req,res){
     res.send(array)
 })
 
-// Ej 8
+// Ej 8 -> Evita duplicar carpeta
 
 app.get('/borrar/:indice', function(req,res){
     if (req.params.indice < array.length){
