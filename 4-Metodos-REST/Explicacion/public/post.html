@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/hola">
+        <input type="text" name="nombre" id="nombreGET">
+        <button type="submit">Enviar</button>
+    </form>
+    <form action="/hola" method="post">
+        <input type="text" name="nombre" id="nombrePOST">
+        <button type="submit">Enviar</button>
+    </form>
+    <form>
+        <input type="text" name="nombre" id="nombrePUT">
+        <button type="button" onclick="peticion()">Enviar</button>
+    </form>
+
+
+    <script src="./post.js"></script>
+</body>
+</html>
