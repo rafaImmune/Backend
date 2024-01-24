@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+          .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            padding: 2px 16px;
+        }
+
+        .biblioteca {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="salida"></div>
+
+    <script>
+        fetch(`https://api.disneyapi.dev/characters/${Math.floor(Math.random() * 500 + 1)}`)
+        .then((res)=>res.json())
+        .then((datos)=>{
+            salida = ` 
+                    <div class="card">
+                        <img src="${datos.data.imageURL}" alt="${datos.data.name}" style="max-width:300px">
+                        <div class="container">
+                            <h4><b>${datos.data.name}</b></h4>
+                            <p>${datos.data["_id"]}</p>
+                        </div>
+                    </div>`
+            console.log(salida)
+            document.getElementById('salida').innerHTML = salida
+        })
+
+       
+
+    </script>
+</body>
+</html>

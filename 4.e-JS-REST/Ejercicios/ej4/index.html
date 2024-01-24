@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+         .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            padding: 2px 16px;
+        }
+
+        .lista {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <select id="planetas" onchange="pedirPersonajes(event)"></select>
+    <div id="salida" class="lista"></div>
+    <script>
+        fetch('https://rickandmortyapi.com/api/location')
+        .then((res)=>res.json())
+        .then((datos)=>{
+            let salida = ""
+            datos.results.forEach(planeta => {
+                salida += `<option value="${planeta.id}">${planeta.name}</option>`
+            });
+
+            document.getElementById('planetas').innerHTML=salida
+        })
+
+        function pedirPersonajes(event){
+            console.log(event)
+            fetch(`https://rickandmortyapi.com/api/location/${event.target.value}`)
+            .then((res)=>res.json())
+            .then((datos) => {
+                let salida = ""
+                Promise.all(datos.residents.map((url)=>fetch(url)))
+                .then((res2)=>Promise.all(res2.map((personaje)=>personaje.json())))
+                .then((datos2)=>{
+                    datos2.forEach((personajeFinal) => {
+                         salida += `
+                            <div class="card">
+                                <img src="${personajeFinal.image}" alt="${personajeFinal.name}" style="max-width:300px">
+                                <div class="container">
+                                    <h4><b>${personajeFinal.name}</b></h4>
+                                    <p>${personajeFinal.status}</p>
+                                </div>
+                            </div>`
+                    })
+                    document.getElementById('salida').innerHTML=salida
+                   
+                })
+            })
+        }
+    </script>
+</body>
+</html>
