@@ -47,7 +47,7 @@ app.get('/buscar', async (req, res) => {
         res.send({ mensaje: "Documentos encontrados: " + results.length, results });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ mensaje: 'Error al hacer la consulta', error });
+        res.status(500).send({ mensaje: 'Error al hacer la consulta', error });
     }
 });
 
@@ -60,7 +60,7 @@ app.post('/anyadir', async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ mensaje: 'Error al hacer la inserción', error });
+        res.status(500).send({ mensaje: 'Error al hacer la inserción', error });
     }
 })
 
@@ -73,7 +73,7 @@ app.put('/modificar', async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ mensaje: 'Error al hacer la modificación', error });
+        res.status(500).send({ mensaje: 'Error al hacer la modificación', error });
     }
 })
 
@@ -86,7 +86,7 @@ app.delete('/borrar', async (req, res) => {
 
     } catch (error) {
         console.error('Error en la peticion')
-        res.status(500).send('Internal Server Error')
+        res.status(500).send({ mensaje: 'Error al hacer la eliminación', error })
     }
 })
 
