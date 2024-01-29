@@ -58,8 +58,7 @@ app.put('/modificar', async (req, res)=>{
     }
 })
 
-// Borrar producto
-
+// Borrar product
 app.delete('/borrar', async (req, res) => {
     try {
         let results = await app.locals.db.collection('tienda')
