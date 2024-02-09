@@ -4,7 +4,6 @@ let app = express()
 let port = process.env.PORT || 3000
 
 let { Autor, Libro } = require('./schemas')
-const e = require('express')
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/prueba')
